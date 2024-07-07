@@ -4,6 +4,7 @@ import _ from 'lodash';
 import Spinner from './Spinner.jsx';
 import Message from './Message.jsx';
 import CountryItem from './CountryItem.jsx';
+import { useCities } from '../contexts/CitiesContext.jsx';
 
 function getCountries(arr) {
     let unique = new Map();
@@ -14,7 +15,8 @@ function getCountries(arr) {
     return Array.from(unique.values());
 }
 
-function CountryList({ cities, isLoading }) {
+function CountryList() {
+    const { cities, isLoading } = useCities();
     if (isLoading) return (<Spinner />);
     if (!cities.length) return (<Message message='Add your first city by clicking on a city on the map' />);
 
