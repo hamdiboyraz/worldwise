@@ -5,15 +5,15 @@ import { useEffect, useState } from 'react';
 import { useCities } from '../contexts/CitiesContext.jsx';
 import { useGeolocation } from '../hooks/useGeolocation.js';
 import Button from './Button.jsx';
+import { useUrlPosition } from '../hooks/useUrlPosition.js';
 
 function Map() {
 
     const { cities } = useCities();
     const [mapPosition, setMapPosition] = useState(['40', '0']);
-    const [searchParams, setSearchParams] = useSearchParams();
     const { position: geolocationPosition, isLoading: isLoadingPosition, getPosition } = useGeolocation();
-    const mapLat = searchParams.get('lat');
-    const mapLng = searchParams.get('lng');
+
+    const [mapLat, mapLng] = useUrlPosition();
 
     useEffect(function() {
         if (mapLat && mapLng) {
@@ -60,10 +60,7 @@ function ChangeCenter({ position }) {
 function DetectClick() {
     const navigate = useNavigate();
     useMapEvents({
-        click: e => {
-            console.log(e);
-            navigate(`form?lat=${e.latlng.lat}&lng=${e.latlng.lng}`);
-        }
+        click: e => navigate(`form?lat=${e.latlng.lat}&lng=${e.latlng.lng}`)
     });
 
 }
