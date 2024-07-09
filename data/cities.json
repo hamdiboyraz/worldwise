@@ -35,6 +35,78 @@
         "lng": 13.376933665713324
       },
       "id": 98443197
+    },
+    {
+      "cityName": "Castilla-La Mancha",
+      "country": "Spain",
+      "emoji": "🇪🇸",
+      "date": "2024-07-08T22:33:45.218Z",
+      "notes": "test",
+      "position": {
+        "lat": "39.13006024213511",
+        "lng": "-4.636230468750001"
+      },
+      "id": 98443198
+    },
+    {
+      "cityName": "Castilla y Leon",
+      "country": "Spain",
+      "emoji": "🇪🇸",
+      "date": "2024-07-08T22:36:54.212Z",
+      "notes": "test",
+      "position": {
+        "lat": "41.3108238809182",
+        "lng": "-5.646972656250001"
+      },
+      "id": 98443199
+    },
+    {
+      "cityName": "Centre-Val de Loire",
+      "country": "France",
+      "emoji": "🇫🇷",
+      "date": "2024-07-08T22:37:26.471Z",
+      "notes": "test",
+      "position": {
+        "lat": "46.92025531537454",
+        "lng": "2.0214843750000004"
+      },
+      "id": 98443200
+    },
+    {
+      "cityName": "Castilla y Leon",
+      "country": "Spain",
+      "emoji": "🇪🇸",
+      "date": "2024-07-09T07:50:44.615Z",
+      "notes": "test",
+      "position": {
+        "lat": "40.83043687764923",
+        "lng": "-4.724121093750001"
+      },
+      "id": 98443201
+    },
+    {
+      "cityName": "Canton de Berne",
+      "country": "Switzerland",
+      "emoji": "🇨🇭",
+      "date": "2024-07-09T07:52:23.933Z",
+      "notes": "",
+      "position": {
+        "lat": "46.7248003746672",
+        "lng": "7.624511718750001"
+      },
+      "id": 98443202
+    },
+    {
+      "cityName": "Hessen",
+      "country": "Germany",
+      "emoji": "🇩🇪",
+      "date": "2024-07-09T07:53:57.558Z",
+      "notes": "hi",
+      "position": {
+        "lat": "51.08282186160978",
+        "lng": "9.997558593750002"
+      },
+      "id": 98443203
     }
   ]
 }
