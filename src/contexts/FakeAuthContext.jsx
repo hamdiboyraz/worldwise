@@ -1,6 +1,14 @@
 import {createContext, useContext, useReducer} from "react";
 
-const AuthContext = createContext();
+//const AuthContext = createContext();
+const AuthContext = createContext({
+    isAuthenticated: false,
+    user: {},
+    login: () => {
+    },
+    logout: () => {
+    },
+});
 
 const initialState = {
     user: null,
