@@ -42,14 +42,17 @@ function AuthProvider({children}) {
         }
     }
 
-    function logout() {}
+    function logout() {
+        dispatch({type: "logout", payload: null})
+    }
 
     return (
-        <AuthContext.Provider value={{}}>
+        <AuthContext.Provider value={{user, isAuthenticated, login, logout}}>
             {children}
         </AuthContext.Provider>
     );
 }
+
 function useAuth() {
     const context = useContext(AuthContext);
     if (!context) {
