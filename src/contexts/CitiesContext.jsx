@@ -1,4 +1,4 @@
-import { createContext, useContext, useEffect, useReducer } from 'react';
+import {createContext, useCallback, useContext, useEffect, useReducer} from 'react';
 
 const CitiesContext = createContext();
 const BASE_URL = 'http://localhost:8000';
@@ -54,38 +54,39 @@ function reducer(state, action) {
     }
 }
 
-function CitiesProvider({ children }) {
-    const [{ cities, isLoading, currentCity, error }, dispatch] = useReducer(reducer, initialState);
+function CitiesProvider({children}) {
+    const [{cities, isLoading, currentCity, error}, dispatch] = useReducer(reducer, initialState);
 
-    useEffect(function() {
+    useEffect(function () {
         async function fetchCities() {
-            dispatch({ type: 'loading' });
+            dispatch({type: 'loading'});
             try {
                 const response = await fetch(`${BASE_URL}/cities`);
                 const data = await response.json();
-                dispatch({ type: 'cities/loaded', payload: data });
+                dispatch({type: 'cities/loaded', payload: data});
             } catch (error) {
-                dispatch({ type: 'rejected', payload: 'Error fetching cities' });
+                dispatch({type: 'rejected', payload: 'Error fetching cities'});
             }
         }
 
         fetchCities();
     }, []);
 
-    async function getCity(id) {
-        if (Number(id) == currentCity.id) return;
-        dispatch({ type: 'loading' });
-        try {
-            const response = await fetch(`${BASE_URL}/cities/${id}`);
-            const data = await response.json();
-            dispatch({ type: 'city/loaded', payload: data });
-        } catch (error) {
-            dispatch({ type: 'rejected', payload: 'Error fetching a city' });
-        }
-    }
+    const getCity = useCallback(
+        async function getCity(id) {
+            if (Number(id) == currentCity.id) return;
+            dispatch({type: 'loading'});
+            try {
+                const response = await fetch(`${BASE_URL}/cities/${id}`);
+                const data = await response.json();
+                dispatch({type: 'city/loaded', payload: data});
+            } catch (error) {
+                dispatch({type: 'rejected', payload: 'Error fetching a city'});
+            }
+        }, [currentCity.id]);
 
     async function createCity(newCity) {
-        dispatch({ type: 'loading' });
+        dispatch({type: 'loading'});
         try {
             const response = await fetch(`${BASE_URL}/cities`, {
                 method: 'POST',
@@ -95,26 +96,26 @@ function CitiesProvider({ children }) {
                 body: JSON.stringify(newCity)
             });
             const data = await response.json();
-            dispatch({ type: 'cities/created', payload: data });
+            dispatch({type: 'cities/created', payload: data});
         } catch (error) {
-            dispatch({ type: 'rejected', payload: 'Error creating a city' });
+            dispatch({type: 'rejected', payload: 'Error creating a city'});
         }
     }
 
     async function deleteCity(id) {
-        dispatch({ type: 'loading' });
+        dispatch({type: 'loading'});
         try {
             const response = await fetch(`${BASE_URL}/cities/${id}`, {
                 method: 'POST'
             });
-            dispatch({ type: 'cities/deleted', payload: id });
+            dispatch({type: 'cities/deleted', payload: id});
         } catch (error) {
-            dispatch({ type: 'rejected', payload: 'Error deleting a city' });
+            dispatch({type: 'rejected', payload: 'Error deleting a city'});
         }
     }
 
     return (
-        <CitiesContext.Provider value={{ cities, isLoading, currentCity, getCity, createCity, deleteCity, error }}>
+        <CitiesContext.Provider value={{cities, isLoading, currentCity, getCity, createCity, deleteCity, error}}>
             {children}
         </CitiesContext.Provider>
     );
@@ -128,4 +129,4 @@ function useCities() {
     return context;
 }
 
-export { CitiesProvider, useCities };
+export {CitiesProvider, useCities};

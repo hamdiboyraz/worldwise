@@ -1,7 +1,7 @@
 import styles from './City.module.css';
-import { useParams, useSearchParams } from 'react-router-dom';
-import { useCities } from '../contexts/CitiesContext.jsx';
-import { useEffect } from 'react';
+import {useParams, useSearchParams} from 'react-router-dom';
+import {useCities} from '../contexts/CitiesContext.jsx';
+import {useEffect} from 'react';
 import Spinner from './Spinner.jsx';
 import BackButton from './BackButton.jsx';
 
@@ -19,25 +19,25 @@ const flagemojiToPNG = (flag) => {
         .map(char => String.fromCharCode(char - 127397)
             .toLowerCase())
         .join('');
-    return (<img src={`https://flagcdn.com/24x18/${countryCode}.png`} alt='flag' />);
+    return (<img src={`https://flagcdn.com/24x18/${countryCode}.png`} alt='flag'/>);
 };
 
 function City() {
-    const { id } = useParams();
+    const {id} = useParams();
 
-    const { currentCity, getCity, isLoading } = useCities();
-    const { cityName, emoji, date, notes } = currentCity;
+    const {currentCity, getCity, isLoading} = useCities();
+    const {cityName, emoji, date, notes} = currentCity;
 
     const [searchParams, setSearchParams] = useSearchParams();
     const lat = searchParams.get('lat');
     const lng = searchParams.get('lng');
 
 
-    useEffect(function() {
+    useEffect(function () {
         getCity(id);
-    }, [id]);
+    }, [id, getCity]);
 
-    if (isLoading) return (<Spinner />);
+    if (isLoading) return (<Spinner/>);
 
     return (
         <div className={styles.city}>
@@ -72,7 +72,7 @@ function City() {
             </div>
 
             <div>
-                <BackButton />
+                <BackButton/>
             </div>
         </div>
     );
